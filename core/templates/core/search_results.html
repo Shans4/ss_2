@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Результаты поиска</h1>
+
+<ul>
+    {% for hunt in results %}
+        <li>{{ hunt.name }} - {{ hunt.description }}</li>
+    {% empty %}
+        <li>Нет результатов</li>
+    {% endfor %}
+</ul>
+{% endblock %}

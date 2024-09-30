@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Любимое
+{% endblock %}
+
+
+{% block content %}
+<h1>Избранное</h1>
+<ul>
+    {% for favorite in favorites %}
+    <li>{{ favorite.article.title }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

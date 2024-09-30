@@ -1,0 +1,44 @@
+<nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary mb-5" data-bs-theme="dark">
+  <div class="container">
+    <a class="navbar-brand" href="{% url 'home' %}">Главная</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'about' %}">О нас</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'contacts' %}">Контакт</a>
+        </li>
+        {% if request.user.is_authenticated %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ request.user.username }}
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'favorites_list' %}">Избраное</a></li>
+            <li><a class="dropdown-item" href="{% url 'create' %}">добавить статью</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Карзина</a>
+        </li>
+        {% endif %}
+      </ul>
+
+        <form method="get" action="{% url 'search_view' %}" class="search-form">
+        <input type="text" name="q" placeholder="Поиск по названию..." aria-label="Поиск">
+        <button type="submit">🔍</button>
+        </form>
+
+      {% if not request.user.is_authenticated %}
+      <a href="{% url 'register' %}" class="btn ms-2 btn-success">Регистрация</a>
+      <a href="{% url 'account' %}" class="btn ms-2 btn-info ">Войти</a>
+      {% else %}
+      <a href="{% url 'logout' %}" class="btn ms-2 btn-danger">Выйти</a>
+      {% endif %}
+    </div>
+  </div>
+</nav>

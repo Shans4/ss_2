@@ -1,0 +1,14 @@
+{% load custom_tags %}
+
+{% get_categories as categories %}
+<div class="list-group">
+      <a href="{% url 'home' %}" class="list-group-item list-group-item-dark {% if request.path == '/' %}active{% endif %}">
+          All</a>
+    {% for category in categories %}
+    {% is_category_current request=request category_id=category.pk as is_current %}
+  <a href="{% url 'category_articles' category.pk %}" class="list-group-item list-group-item-dark{% if is_corrent %}active{%endif%}">{{category.title}}</a>
+    {% endfor %}
+</div>
+<!--  {% for category in categories %}-->
+<!--  <li class="list-group-item active" aria-current="true">{{category.title}}</li>-->
+<!--   {% endfor %}-->
